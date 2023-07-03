@@ -2,8 +2,13 @@ import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
 import { SearchForm } from "./components/SearchForm";
 import { PriceHighLight, TransactionsContainer, TransactionsTable } from "./styles";
+import { useContext } from 'react'
+import { TransactionsContext } from "../../contexts/TransactionsContext"
+import { dataFormatter, priceFormatter } from "../../utils/formatter";
 
 export function Transactions() {
+  const { transactions } = useContext(TransactionsContext);
+
   return (
     <div>
       <Header />
@@ -14,26 +19,22 @@ export function Transactions() {
         
         <TransactionsTable>
           <tbody>
-            <tr>
-              <td width="50%">Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight variant="income">
-                  R$ 12000
-                </PriceHighLight>
-              </td>
-              <td>Venda</td>
-              <td>13/04/2022</td>
-            </tr>
-            <tr>
-              <td width="50%">Desenvolvimento de site</td>
-              <td>
-                <PriceHighLight variant="outcome">
-                  -R$ 5000
-                </PriceHighLight>
-              </td>
-              <td>Venda</td>
-              <td>13/04/2022</td>
-            </tr>
+            {transactions.map((transactions) => {
+              return(
+                <tr key={transactions.id}>
+                  <td width="50%">{transactions.description}</td>
+                  <td>
+                    <PriceHighLight variant={transactions.type}>
+                      {transactions.type === 'outcome' && '- '}
+                      {priceFormatter.format(transactions.price)}
+                    </PriceHighLight>
+                  </td>
+                  <td>{transactions.type}</td>
+                  <td>{dataFormatter.format(new Date(transactions.createdAt))}</td>
+                </tr>
+              )
+            })}
+            
           </tbody>
         </TransactionsTable>
       </TransactionsContainer>
