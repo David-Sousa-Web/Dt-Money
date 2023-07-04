@@ -15,6 +15,22 @@
       "category": "Alimentação",
       "price": 50,
       "createdAt": "2022-07-29T20:36:44.505Z"
+    },
+    {
+      "description": "desenvolvimento de app",
+      "price": 22200,
+      "category": "Venda",
+      "type": "income",
+      "createdAt": "2023-07-04T14:29:50.393Z",
+      "id": 3
+    },
+    {
+      "description": "banana",
+      "price": 6,
+      "category": "alimento",
+      "type": "outcome",
+      "createdAt": "2023-07-04T14:46:38.531Z",
+      "id": 4
     }
   ]
 }
